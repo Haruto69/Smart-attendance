@@ -1,0 +1,41 @@
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+
+# Environment files
+.env
+.venv/
+env/
+venv/
+
+# SQLite database
+attendance.db
+
+# Face recognition model
+trainer/
+*.yml
+
+# Dataset images
+dataset/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Tkinter window cache (if any)
+*.pyw
+
+# VSCode and IDE folders
+.vscode/
+.idea/
+
+# Backup files
+*~
+*.bak
