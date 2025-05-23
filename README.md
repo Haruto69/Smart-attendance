@@ -36,7 +36,7 @@ dbms project/
 
 Install dependencies using:
 ```bash
-pip install opencv-contrib-python pillow
+pip install -r requirements.txt
 ```
 
 ## ▶️ How to Run
