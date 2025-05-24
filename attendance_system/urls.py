@@ -6,4 +6,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('attendance/', include('attendance.urls')),
     path('', lambda request: redirect('attendance:login')),  # Redirect root to login
-]
+]   

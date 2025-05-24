@@ -3,7 +3,7 @@
 import sqlite3
 
 def initialize_db():
-    conn = sqlite3.connect("attendance.db")
+    conn = sqlite3.connect("db.sqlite3")
     cursor = conn.cursor()
 
     # Create students table

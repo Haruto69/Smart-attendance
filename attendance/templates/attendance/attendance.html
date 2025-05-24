@@ -48,6 +48,10 @@
                     {% endif %}
                 </td>
             </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No attendance records found.</td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>

@@ -21,12 +21,26 @@ def login_view(request):
 
     return render(request, 'attendance/login.html', {'form': form})
 
+
 # Attendance View - View attendance data
 @login_required
 def attendance_view(request):
-    # Fetch today's attendance records
     today = date.today()
-    attendance_records = Attendance.objects.filter(date=today)
+    
+    # Prefetch related student data
+    attendance_records = Attendance.objects.select_related('student').filter(date=today)
 
-    return render(request, 'attendance/attendance.html', {'attendance_records': attendance_records, 'date': today})
+    # Build list of attendance records with student name
+    records = []
+    for record in attendance_records:
+        records.append({
+            'id': record.id,
+            'student_name': record.student.name,
+            'date': record.date,
+            'status': record.status
+        })
 
+    return render(request, 'attendance/attendance.html', {
+        'attendance_records': records,
+        'date': today
+    })
