@@ -96,8 +96,8 @@
   <div id="vanta-bg"></div>
 
   <main class="glass-container" data-aos="fade-up">
-    <h2>Student Login</h2>&nbsp;
-    <form method="POST">
+    <h2>Student Login</h2> &nbsp;
+    <form method="POST" novalidate>
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit">Login</button>

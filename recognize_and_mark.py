@@ -5,7 +5,7 @@ import django
 import sys
 
 # Setup Django environment (adjust this path to your Django project root)
-sys.path.append(r"C:\\Users\\Siri V Hegde\\Desktop\\Smart-attendance")  # Use raw string or double backslashes
+sys.path.append(r"C:\\Users\\eng22\\OneDrive\\Desktop\\Smart-attendance-master")  # Use raw string or double backslashes
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'attendance_system.settings')  # Your Django settings module
 django.setup()
 
@@ -56,13 +56,23 @@ while True:
                 today = now().date()
 
                 # Get any teacher, or handle if none exists
-                teacher = Teacher.objects.first()
+                print("Available teachers:")
+                for t in Teacher.objects.all():
+                    print("-", t.user.username)
 
+                teacher_username = input("Enter teacher's username: ")
+                try:
+                    teacher = Teacher.objects.get(user__username=teacher_username)
+                    print(f"Attendance will be marked under teacher: {teacher.user.username}")
+                except Teacher.DoesNotExist:
+                    print("[ERROR] No teacher found with that username.")
+                    sys.exit()
                 # Mark attendance if not already marked for today
                 attendance, created = Attendance.objects.get_or_create(
                     student=student,
                     date=today,
-                    defaults={'status': True, 'teacher': teacher}
+                    teacher=teacher,
+                    defaults={'status': True}
                 )
 
                 if created:

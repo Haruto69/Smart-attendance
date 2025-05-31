@@ -6,7 +6,7 @@ app_name = 'attendance'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),  # ← fixed this line
+    path('', views.index, name='index'),
     path('login/', views.login_view, name='login'),
     path('attendance/', views.attendance_view, name='attendance_page'),
 ]

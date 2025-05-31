@@ -8,7 +8,8 @@ class Teacher(models.Model):
         return self.user.username
 
 class Student(models.Model):
-    id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+  # NEW: link to User
     name = models.CharField(max_length=100)
     registered_on = models.DateTimeField(auto_now_add=True)
 
