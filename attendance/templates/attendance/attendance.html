@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Attendance Records</title>
+
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- THREE + VANTA.NET -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      color: white;
+      background: #0b0b0b;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+    }
+    #vanta-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -10;
+    }
+    .glass-container {
+      background: rgba(15, 32, 39, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0, 198, 255, 0.3);
+      padding: 2rem;
+      max-width: 900px;
+      margin: 4rem auto;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+    thead th {
+      background: rgba(0, 198, 255, 0.2);
+      border-bottom: 2px solid #00c6ff;
+      padding: 12px 16px;
+      text-align: left;
+      color: #00e5ff;
+      font-weight: 600;
+    }
+    tbody td {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 12px 16px;
+      color: #ccefff;
+    }
+    tbody tr:hover {
+      background-color: rgba(0, 198, 255, 0.15);
+    }
+    tbody td.status-present {
+      color: #7ed957; /* green */
+      font-weight: 600;
+    }
+    tbody td.status-absent {
+      color: #f56565; /* red */
+      font-weight: 600;
+    }
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #00c6ff;
+      text-shadow: 0 0 8px #00c6ff;
+    }
+  </style>
+</head>
+<body>
+  <div id="vanta-bg"></div>
+
+  <main class="glass-container" data-aos="fade-up">
+    <h2>Attendance Records</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Student Name</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in attendance_records %}
+          <tr>
+            <td>{{ record.id }}</td>  <!-- changed here -->
+            <td>{{ record.student_name }}</td>
+            <td>{{ record.date }}</td>
+            <td class="{% if record.status %}status-present{% else %}status-absent{% endif %}">
+              {% if record.status %}Present{% else %}Absent{% endif %}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="4" class="text-center text-gray-300 py-4">No attendance records found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    AOS.init();
+
+    VANTA.NET({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      color: 0x00c6ff,
+      backgroundColor: 0x0b0b0b,
+    });
+  </script>
+</body>
+</html>
