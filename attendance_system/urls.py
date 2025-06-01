@@ -5,5 +5,5 @@ from django.shortcuts import redirect
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('attendance/', include('attendance.urls')),    
-    path('', include('attendance.urls')),  # Redirect root to login
-]   
+    path('', lambda request: redirect('attendance:login')),  # Redirect root to login
+]
