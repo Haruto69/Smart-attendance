@@ -114,7 +114,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-
 # Default primary key field type
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Add these lines to fix your login redirect problem
+LOGIN_URL = '/attendance/login/'
+LOGOUT_REDIRECT_URL = '/attendance/login/'
