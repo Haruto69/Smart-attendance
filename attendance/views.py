@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import TeacherLoginForm
 from .models import Attendance, Student
@@ -26,7 +26,7 @@ def login_view(request):
 @login_required
 def attendance_view(request):
     try:
-        student = Student.objects.get(user=request.user)  # UPDATED: get student by linked user
+        student = Student.objects.get(user=request.user)  # get student by linked user
     except Student.DoesNotExist:
         return render(request, 'attendance/attendance.html', {
             'error': "Student record not found for this user."
@@ -48,3 +48,8 @@ def attendance_view(request):
         'student_name': student.name,
         'attendance_by_date': grouped_records
     })
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('attendance:login.html')
